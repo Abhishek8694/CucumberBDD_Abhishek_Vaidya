@@ -5,9 +5,13 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.DoubleClickAction;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.cucumber.java.Scenario;
 import junit.framework.Assert;
@@ -18,19 +22,19 @@ public class FooterSectionObjects {
 
 	WebDriver driver;
 	Scenario scn;
-	WebDriver wait;
+	WebDriverWait wait;
+	JavascriptExecutor js;
+	Actions actions;
+
+	
 	
 //	constructor
-	public FooterSectionObjects(WebDriver driver, Scenario scn ) {
+	public FooterSectionObjects(WebDriver driver, Scenario scn) {
 		this.driver = driver;
 		this.scn = scn;
 		this.wait = wait;
 	}
 	
-	
-//	String TName = "Selenium Framework";
-	String Sms = "Newsletter : You have successfully subscribed to this newsletter.";
-
 	//*******************************************************************************************************//
 	
 	
@@ -48,6 +52,8 @@ public class FooterSectionObjects {
 	{
 		
 	WebElement TweetLink = driver.findElement(TwitLink);
+	
+	
 	TweetLink.click();
 	}
 
@@ -61,39 +67,31 @@ public class FooterSectionObjects {
 
 	}	
 	
-	//*******************************************************************************************************//
+	//*******************************************************************************************************//	
 
-//	10
-	
-	public  String randomStringGenerator () {
-		Random random = new Random();
-		String randomName = "";
-		
-		for (int i=0; i<10; i++)
-		{
-			char characterRandom = (char)(random.nextInt(26)+97);
-			if(random.nextBoolean())
-			{
-				characterRandom = Character.toUpperCase(characterRandom);
-				randomName = randomName + characterRandom;
-			}
-		}
-			
-		randomName =randomName+"@gmail.com";
-		
-		return randomName;
-	}
-	
-	//*******************************************************************************************************//
-
-	
+//	10 Newspaper
 	public void NewsBox() {
 		
 		WebElement SubcTxtBox = driver.findElement(newsletter);
-
-		SubcTxtBox.sendKeys(randomStringGenerator());
+		
+		 String randomName1 = RandomNoGeneratorUtils.randomStringGenerator();
+			
+		
+		SubcTxtBox.sendKeys(randomName1);
+		
 		WebElement GoBtn = driver.findElement(NewGoBtn);
+		 wait = new WebDriverWait(driver,20);
+
+		wait.until(ExpectedConditions.elementToBeClickable(NewGoBtn));
+
 		GoBtn.click();
+		
+//		Actions actions = new Actions(driver);
+//		actions.click(GoBtn);
+		
+		
+//		JavascriptExecutor js = ((JavascriptExecutor) driver);
+//		js.executeScript("arguments[0].click();",GoBtn);
 	
 			scn.log("Subscription alert message  displayed");
 			logger.info("Subscription alert message  displayed");
@@ -101,14 +99,15 @@ public class FooterSectionObjects {
 	
 	//*******************************************************************************************************//
 
-	public void SuccessMsg() {
+	public void SuccessMsg(String string) {
 		
-	
+//		WebElement Msg = driver.findElement(NewScsMsg);
+
 		try {
 						
 		WebElement Msg = driver.findElement(NewScsMsg);
 		
-		Assert.assertEquals("Success message are not same", true, Msg.getText().contains(Sms));
+		Assert.assertEquals("Success message are not same", true, Msg.getText().contains(string));
 		
 		}
 		

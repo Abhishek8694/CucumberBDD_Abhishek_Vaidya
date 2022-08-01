@@ -11,7 +11,7 @@ Feature: E-commerce project website health check
 		Scenario: Landing Page URL Redirection Test 
 		
 		When  Open Landing Page
-		Then it will be redirected as "http:automationpractice.com/index.php"
+		Then it will be redirected as "http://automationpractice.com/index.php"
 
 #######################################################################################################
 
@@ -50,7 +50,7 @@ Feature: E-commerce project website health check
 		Scenario: Check the Logo Height on the Landing Page
 		
 		When logo is displayed on the landing page
-		Then the logo height should be 99
+		Then the logo height should be "99"
 
 #######################################################################################################
 
@@ -58,7 +58,7 @@ Feature: E-commerce project website health check
 		Scenario: Check the Logo width on the Landing Page
 		
 		When logo is displayed on landing page
-		Then the logo width should be 350
+		Then the logo width should be "350"
 
 #######################################################################################################
 
@@ -95,6 +95,7 @@ Feature: E-commerce project website health check
 			
 			When User enters his/her Email-ID in newsletter subscription text box 
 			
-			Then message text should be displayed for the successful email subscription
+			Then message text should be displayed for the successful email subscription as "Newsletter : You have successfully subscribed to this newsletter."
+			
     
 ####################################################################################################### 

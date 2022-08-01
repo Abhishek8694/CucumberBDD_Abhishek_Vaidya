@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,8 +24,9 @@ public class SignInPageObject {
 	JavascriptExecutor js;
 	
 //	locator
-	private By Sign = By.xpath("//a[@class='login']");
-	
+	private By Sign = By.xpath("//div/a[contains(text(),'Sign in')]");
+	//a[@title='Log in to your customer account']
+	//div/a[contains(text(),'Sign in')]
 	
 //	constructor
 	public SignInPageObject(WebDriver driver, Scenario scn ) {
@@ -40,15 +42,23 @@ public class SignInPageObject {
 		WebElement SignInBtn = driver.findElement(Sign);
 		
 		 wait = new WebDriverWait(driver,20);
+		 
 			scn.log("reached signin btn");
 			logger.info("reached signin btn");
-		
-				JavascriptExecutor js = ((JavascriptExecutor) driver);
-				js.executeScript("arguments[0].click();",SignInBtn);
-				
-				
-				wait.until(ExpectedConditions.titleContains("Login - My Store"));
+			
+			wait.until(ExpectedConditions.elementToBeClickable(Sign));
 
+			SignInBtn.click();
+			
+//			Actions actions = new Actions(driver);
+//			actions.click(SignInBtn);
+			
+			
+		
+//				JavascriptExecutor js = ((JavascriptExecutor) driver);
+//				js.executeScript("arguments[0].click();",SignInBtn);
+				
+	
 	}
 	
 //*******************************************************************************************************//

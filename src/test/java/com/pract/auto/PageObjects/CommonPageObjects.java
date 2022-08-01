@@ -21,21 +21,10 @@ public class CommonPageObjects {
 	
 //*******************************************************************************************************//
 
-	int ActLogHt = 99;
-	int ActLogWid = 350;
-	public static final String ExpTitle = "My Store";
-	String ExpUrl = "http://automationpractice.com/index.php";
-	
-//*******************************************************************************************************//
-
-	
 //	Locators
 	
 	private  By logoDisplay = By.xpath("//div[@id='header_logo']/a/img");
 
-	
-	
-	
 	public CommonPageObjects(WebDriver driver,Scenario scn) {
 		this.driver = driver;
 		this.scn = scn;
@@ -52,11 +41,13 @@ public class CommonPageObjects {
 
 //*******************************************************************************************************//
 
-	public void RedirectURL()
+	public void RedirectURL(String string)
 	{
 		
 	String ActUrl = driver.getCurrentUrl();
-	Assert.assertEquals(ExpUrl, ActUrl);
+//	Assert.assertEquals(ActUrl,string);
+	
+	Assert.assertEquals(true, ActUrl.contentEquals(string));
 	
 	scn.log("Redirected Website Link is" + driver.getCurrentUrl());
 	logger.info("Redirected Website Link is" + driver.getCurrentUrl());
@@ -64,11 +55,11 @@ public class CommonPageObjects {
 	
 //*******************************************************************************************************//
 
-	public void MyStore()
+	public void MyStore(String string)
 	{
 		driver.getTitle();
     	String ActTitle = driver.getTitle();
-    	Assert.assertEquals(ExpTitle, ActTitle);
+    	Assert.assertEquals(true, ActTitle.equals(string));
 	}
 	
 //*******************************************************************************************************//
@@ -86,15 +77,13 @@ public class CommonPageObjects {
 //*******************************************************************************************************//
 
 	
-	public void logoHeight() 
+	public void logoHeight(String string) 
 	{
 		WebElement logo_1 = driver.findElement(logoDisplay);
-		String i = logo_1.getAttribute("height");
+		String h = logo_1.getAttribute("height");
 		
-		int expht = Integer.parseInt(i);
-		int Actht =ActLogHt;
-		
-		Assert.assertEquals(expht, Actht);
+//		Assert.assertEquals(string, h);
+		Assert.assertEquals(true, h.equals(string));
 		
 		scn.log("Logo's height is validated successfully");
 		logger.info("Logo's height is validated successfully");
@@ -103,16 +92,13 @@ public class CommonPageObjects {
 //*******************************************************************************************************//
 
 	
-	public void logoWidth()
+	public void logoWidth(String string)
 	{
 		WebElement logo_2 = driver.findElement(logoDisplay);
-		String j = logo_2.getAttribute("width");
+		String w = logo_2.getAttribute("width");
 		
-		int expwd = Integer.parseInt(j);
-		int Actwd =ActLogWid;
-		
-		Assert.assertEquals(expwd, Actwd);
-		
+		Assert.assertEquals(true, w.equals(string));
+				
 		scn.log("Logo's width is validated successfully");
 		logger.info("Logo's width is validated successfully");
 	}

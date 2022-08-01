@@ -51,23 +51,27 @@ public class ProductCategoryObject {
 	}	
 //*******************************************************************************************************//
 
-	public void prodcateg(List <String> product_category) {
+	public void prodcateg(List<String> product_category) {
 		 List<WebElement> ListProds =  driver.findElements(prod);
 		 
-//		 Assert.assertEquals(product_category, ListProds);
-
-		for (int i =0; i<ListProds.size(); i++)
+		 
+		for (int i=0; i<ListProds.size();i++)
 		{
-			if(ListProds.get(i).getText().equals(product_category.get(i).toString()))
+			for(int j=0;j<product_category.size();j++)
 			{
-				Assert.assertTrue(true);
+						
+			if(ListProds.get(i).getText().equals(product_category.get(j).toString()))
+
+			
+			{
+				Assert.assertTrue(true);				
 			}
 			else
 			{
 				Assert.assertFalse(false);
-			}
-		}
-	}
+				
+	}}}}
+			
 	
 //*******************************************************************************************************//
 

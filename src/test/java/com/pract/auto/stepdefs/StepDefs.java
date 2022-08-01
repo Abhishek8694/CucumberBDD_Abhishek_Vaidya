@@ -25,7 +25,8 @@
 import com.pract.auto.PageObjects.ProductCategoryObject;
 	import com.pract.auto.PageObjects.SearchProdPagObjects;
 	import com.pract.auto.PageObjects.SignInPageObject;
-	import com.pract.auto.core.WebDriverFactory;
+import com.pract.auto.PageObjects.RandomNoGeneratorUtils;
+import com.pract.auto.core.WebDriverFactory;
 	
 	import io.cucumber.java.After;
 	import io.cucumber.java.Before;
@@ -52,6 +53,8 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 	    ProductCategoryObject productCategoryObject;
 	    SearchProdPagObjects searchProdPagObjects;
 	    SignInPageObject signInPageObject;
+	    RandomNoGeneratorUtils randomNoGeneratorUtils;
+	    
 	    
 	    
 	//*******************************************************************************************************//
@@ -72,6 +75,7 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 	        productCategoryObject = new ProductCategoryObject(driver, scn);
 	        searchProdPagObjects = new SearchProdPagObjects(driver, scn);
 	        signInPageObject = new SignInPageObject(driver, scn);
+	        randomNoGeneratorUtils = new RandomNoGeneratorUtils(driver, scn);
 	       }
 	    
 	//****************************************Screenshot*****************************************************
@@ -110,33 +114,32 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 	//    1st case:Redirection Test
 	    
 	    @When("Open Landing Page")
-	    public void navigate_to_the_url() {
-	
-	    	//    	commonPageObjects.NavigationURL();
-	
-	    	 scn.log("Entered the Website" + url);
-	     	 logger.info("Entered the Website" + url);
+	    public void open_landing_page() {
+//	    	commonPageObjects.NavigationURL();
+	    	
+	    scn.log("Entered the Website" + url);
+	    logger.info("Entered the Website" + url);
 	    }
-	    
+
 	    @Then("it will be redirected as {string}")
 	    public void it_will_be_redirected_as(String string) {
-	    	
-	    	commonPageObjects.RedirectURL();
-	    	
+	        commonPageObjects.RedirectURL(string);
 	    }
 	    
 	    
 	// ****************************************Scenario 2*****************************************************//
 	   
 	//   2nd case: Landing page Title Test
-	    
+     
 	    @When("landing page is displayed")
 	    public void landing_page_is_displayed() {
-	//    	driver.get(base_url);
+//	    	driver.get(base_url);
 	    }
-	    @Then("Title Should be \"My Store\"")
-	    public void title_should_be_my_store() {
-	    	commonPageObjects.MyStore();
+
+	    @Then("Title Should be {string}")
+	    public void title_should_be(String string) {
+	     
+	    	commonPageObjects.MyStore(string);
 	    	scn.log("The Title of landing page is :" + driver.getTitle() );
 	    	logger.info("The Title of landing page is :" + driver.getTitle() );
 	    }
@@ -153,7 +156,7 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 	
 	
 	    @Then("category should be displayed on the landing page is")
-	    public void category_should_be_displayed_on_the_landing_page_is(List <String>product_category) {
+	    public void category_should_be_displayed_on_the_landing_page_is(List<String> product_category) {
 	    	
 	    	productCategoryObject.prodcateg(product_category);
 	    	
@@ -195,12 +198,12 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 		scn.log("Logo is available on the landing page");
 	
 	}
-	@Then("the logo height should be {int}")
-	public void the_logo_height_should_be(Integer int1)
+	@Then("the logo height should be {string}")
+	public void the_logo_height_should_be(String string)
 	{
-		commonPageObjects.logoHeight();
-		scn.log("Logo height is" + int1);
-		logger.info("Logo height is" + int1);
+		commonPageObjects.logoHeight(string);
+		scn.log("Logo height is" + string);
+		logger.info("Logo height is" + string);
 		}
 	    
 	//****************************************Scenario 6*****************************************************//
@@ -213,13 +216,13 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 		scn.log("Logo is available on the landing page");
 	}
 	
-	@Then("the logo width should be {int}")
-	public void the_logo_width_should_be(Integer int1) 
+	@Then("the logo width should be {string}")
+	public void the_logo_width_should_be(String string) 
 	{
-		commonPageObjects.logoWidth();
+		commonPageObjects.logoWidth(string);
 		
-		scn.log("Logo width is" + int1);
-		logger.info("Logo width is" + int1);
+		scn.log("Logo width is" + string);
+		logger.info("Logo width is" + string);
 
 	
 	}
@@ -294,20 +297,24 @@ import com.pract.auto.PageObjects.ProductCategoryObject;
 	
 	}
 	
+	
 	//****************************************Scenario 10*****************************************************//
 	
 	    //10th case: Newsletter Subscription Validation
-	
-		@When("User enters his\\/her Email-ID in newsletter subscription text box")
-		public void user_enters_his_her_email_id_in_newsletter_subscription_text_box() {
-			
-			footerSectionObjects.NewsBox();
-		}
-		
-	
-		@Then("message text should be displayed for the successful email subscription")
-		public void message_text_should_be_displayed_for_the_successful_email_subscription() {
-		
-//			footerSectionObjects.SuccessMsg();
-		}
+
+	@When("User enters his\\/her Email-ID in newsletter subscription text box")
+	public void user_enters_his_her_email_id_in_newsletter_subscription_text_box() {
+	   
+		footerSectionObjects.NewsBox();
 	}
+
+
+	@Then("message text should be displayed for the successful email subscription as {string}")
+	public void message_text_should_be_displayed_for_the_successful_email_subscription_as(String string) {
+	   
+		footerSectionObjects.SuccessMsg(string);
+	}
+
+	}
+	
+	
